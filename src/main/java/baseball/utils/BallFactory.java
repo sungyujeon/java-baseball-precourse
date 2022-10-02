@@ -2,9 +2,7 @@ package baseball.utils;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 import static baseball.constants.BaseballConstant.*;
 
@@ -18,23 +16,24 @@ public final class BallFactory {
 
     private BallFactory() {}
 
-    public static Set<Integer> createBalls() {
-        Set<Integer> balls = new LinkedHashSet<>();
-        while (balls.size() < MAX_SIZE) {
+    public static List<Integer> createBalls() {
+        Set<Integer> ballSet = new HashSet<>();
+        while (ballSet.size() < MAX_SIZE) {
             int pickedNumber = Randoms.pickNumberInRange(1, 9);
-            balls.add(pickedNumber);
+            ballSet.add(pickedNumber);
         }
-        return balls;
+
+        return Collections.unmodifiableList(new ArrayList<>(ballSet));
     }
 
-    public static Set<Integer> createBalls(String input) {
+    public static List<Integer> createBalls(String input) {
         validate(input);
 
-        Set<Integer> balls = new LinkedHashSet<>();
+        List<Integer> balls = new ArrayList<>();
         for (char charNumber : input.toCharArray()) {
             balls.add(Integer.parseInt(String.valueOf(charNumber)));
         }
-        return balls;
+        return Collections.unmodifiableList(balls);
     }
 
     private static void validate(String input) {
