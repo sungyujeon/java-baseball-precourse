@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static baseball.constants.BaseballConstant.*;
+
 /**
  * 공 생성 팩토리
  * - MAX_SIZE는 3으로, 공의 숫자는 1~9의 한자리 자연수로 제한한다.
@@ -13,8 +15,6 @@ import java.util.Set;
  * - 파라미터값이 있을 경우 0값을 제외한 중복되지 않는 수로 이루어진 문자열 입력값으로 생성한다.
  */
 public final class BallFactory {
-
-    private static final int MAX_SIZE = 3;
 
     private BallFactory() {}
 

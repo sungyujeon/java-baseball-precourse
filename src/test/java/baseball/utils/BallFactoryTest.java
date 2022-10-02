@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +15,7 @@ class BallFactoryTest {
 
     @Test
     void set_사이즈() {
-        Set<Integer> actual = BallFactory.createBalls("123");
+        List<Integer> actual = BallFactory.createBalls("123");
 
         assertThat(actual.size()).isEqualTo(3);
     }
@@ -26,7 +27,7 @@ class BallFactoryTest {
         expected.add(5);
         expected.add(6);
 
-        Set<Integer> actual = BallFactory.createBalls("456");
+        List<Integer> actual = BallFactory.createBalls("456");
 
         assertThat(actual).isEqualTo(expected);
     }
