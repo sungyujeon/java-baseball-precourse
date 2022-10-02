@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,10 +20,11 @@ class BallFactoryTest {
 
     @Test
     void 공_생성() {
-        Set<Integer> expected = new LinkedHashSet<>();
-        expected.add(4);
-        expected.add(5);
-        expected.add(6);
+        List<Integer> balls = new ArrayList<>();
+        balls.add(4);
+        balls.add(5);
+        balls.add(6);
+        List<Integer> expected = Collections.unmodifiableList(balls);
 
         List<Integer> actual = BallFactory.createBalls("456");
 
