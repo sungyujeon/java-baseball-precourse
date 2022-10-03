@@ -1,15 +1,17 @@
-package baseball.utils;
+package baseball.entity;
 
+import baseball.utils.BallFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class BallFactoryTest {
+class BallsTest {
 
     @Test
     void set_사이즈() {
@@ -20,15 +22,14 @@ class BallFactoryTest {
 
     @Test
     void 공_생성() {
-        List<Integer> balls = new ArrayList<>();
-        balls.add(4);
-        balls.add(5);
-        balls.add(6);
-        List<Integer> expected = Collections.unmodifiableList(balls);
+        List<Integer> expected = new ArrayList<>();
+        expected.add(4);
+        expected.add(5);
+        expected.add(6);
 
-        List<Integer> actual = BallFactory.createBalls("456");
+        Balls actual = Balls.createBalls("456");
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.getContainer()).isEqualTo(expected);
     }
 
     @Test
@@ -60,4 +61,5 @@ class BallFactoryTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("each input value cannot exceed one natural number.");
     }
+
 }
