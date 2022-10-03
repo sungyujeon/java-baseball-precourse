@@ -16,10 +16,10 @@ public final class BaseballGame {
     private final Computer computer;
     private final Player player;
 
-    public BaseballGame(Computer computer, Player player) {
+    public BaseballGame() {
         gameStatus = START;
-        this.computer = computer;
-        this.player = player;
+        this.computer = new Computer();
+        this.player = new Player();
     }
 
     public void start() {

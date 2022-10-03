@@ -154,3 +154,21 @@
 - [x] 볼/스트라이크/낫싱 등 숫자가 맞는지에 대한 판단 책임은 어떤 클래스가 가져야 하는가
 - [x] 각 클래스 간의 종속성을 줄이기 위해 관계를 느슨하게 만드는 것은 어디까지 고려해야 하는가
   - [x] Computer, Player의 인터페이스 또는 BaseballGame 등의 인터페이스를 만드는 것은 현재 게임 조건 상에서 불필요하다 판단하여 생략
+
+<br>
+
+## Issue
+
+##### Randoms.pickNumberInRange() 메서드 사용 시 ApplicationTest 통과 실패
+
+- 현상
+  - Randoms api로 임의의 수 생성 시 무한 반복 후 ExecutionTimeoutException 발생
+
+- 원인
+  - ApplicationTest 내에서 com.nextstep.edu.missionutils.test 패키지의 Assertions 클래스에서 assertRandomNumberInRangeTest() 메서드를 호출하고 있었음
+  - 해당 메서드는 assertRandomTest() private method를 재호출하는데, value를 초기값으로 values list int들까지 순차적으로 리턴하는 구조
+  - 이 때, value = 1, ...values = {3, 5, 5, 8, 9} 이므로 Randoms.pickNumbersInRange() 호출이 7번 이상 이루어지면 랜덤수로 int = 9만을 리턴하게 됨
+  - Player 클래스에서 초기 임의의 숫자 생성 후 game.start() 시 재할당 해주는 코드가 문제가 됨
+- 해결
+  - ApplicationTest 초기 ramdon input 값의 환경에 맞춰주기 위해 Player 클래스의 임의 숫자 생성 초기화 코드 삭제
+  - 해당 코드 삭제 후 해당 ApplicationTest에서 '135', '589' 두가지 숫자를 맞추는 숫자야구게임으로 제한

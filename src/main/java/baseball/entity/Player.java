@@ -2,7 +2,7 @@ package baseball.entity;
 
 public final class Player {
 
-    private Balls balls = Balls.createBalls();
+    private Balls balls;
 
     public Balls getBalls() {
         return balls;
