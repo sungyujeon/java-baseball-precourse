@@ -1,18 +1,14 @@
 package baseball.entity;
 
-import java.util.List;
-
-import static baseball.utils.BallFactory.*;
-
 public final class Computer {
 
-    private List<Integer> balls = createBalls();
+    private Balls balls = Balls.createBalls();
 
-    public List<Integer> getBalls() {
+    public Balls getBalls() {
         return balls;
     }
 
     public void changeBalls() {
-        this.balls = createBalls();
+        this.balls = Balls.createBalls();
     }
 }
