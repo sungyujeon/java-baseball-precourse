@@ -1,4 +1,4 @@
-package baseball.utils;
+package baseball.entity;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -6,34 +6,34 @@ import java.util.*;
 
 import static baseball.constants.BaseballConstant.*;
 
-/**
- * 공 생성 팩토리
- * - MAX_SIZE는 3으로, 공의 숫자는 1~9의 한자리 자연수로 제한한다.
- * - 파라미터값이 없을 경우 임의의 중복되지 않는 수로 생성한다.
- * - 파라미터값이 있을 경우 0값을 제외한 중복되지 않는 수로 이루어진 문자열 입력값으로 생성한다.
- */
-public final class BallFactory {
+public final class Balls {
 
-    private BallFactory() {}
+    private List<Integer> container = new ArrayList<>();
 
-    public static List<Integer> createBalls() {
+    private Balls() {}
+
+    public static Balls createBalls() {
         Set<Integer> ballSet = new HashSet<>();
         while (ballSet.size() < MAX_SIZE) {
             int pickedNumber = Randoms.pickNumberInRange(1, 9);
             ballSet.add(pickedNumber);
         }
 
-        return Collections.unmodifiableList(new ArrayList<>(ballSet));
+        Balls balls = new Balls();
+        balls.container = new ArrayList<>(ballSet);
+
+        return balls;
     }
 
-    public static List<Integer> createBalls(String input) {
+    public static Balls createBalls(String input) {
         validate(input);
 
-        List<Integer> balls = new ArrayList<>();
+        Balls balls = new Balls();
         for (char charNumber : input.toCharArray()) {
-            balls.add(Integer.parseInt(String.valueOf(charNumber)));
+            balls.container.add(Integer.parseInt(String.valueOf(charNumber)));
         }
-        return Collections.unmodifiableList(balls);
+
+        return balls;
     }
 
     private static void validate(String input) {
@@ -79,6 +79,10 @@ public final class BallFactory {
         if (number < '1' || number > '9') {
             throw new IllegalArgumentException("each input value cannot exceed one natural number.");
         }
+    }
+
+    public List<Integer> getContainer() {
+        return container;
     }
 
 }
