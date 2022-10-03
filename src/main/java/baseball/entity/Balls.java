@@ -36,11 +36,6 @@ public final class Balls {
         return balls;
     }
 
-    public Score checkScore(String input) {
-        Balls balls = createBalls(input);
-        return Score.createScore(this, balls);
-    }
-
     private static void validate(String input) {
         requireNonNull(input);
         validateDuplicate(input);

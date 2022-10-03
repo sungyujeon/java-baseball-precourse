@@ -21,7 +21,7 @@ class ScoreTest {
         Score expected = new Score(0, 0);
 
         Balls balls = Balls.createBalls(input);
-        Score actual = Score.createScore(targetBalls, balls);
+        Score actual = Score.createScore(balls, targetBalls);
 
         assertThat(actual.getStrike()).isEqualTo(expected.getStrike());
         assertThat(actual.getBall()).isEqualTo(expected.getBall());
@@ -33,7 +33,7 @@ class ScoreTest {
         Score expected = new Score(2, 0);
 
         Balls balls = Balls.createBalls(input);
-        Score actual = Score.createScore(targetBalls, balls);
+        Score actual = Score.createScore(balls, targetBalls);
 
         assertThat(actual.getStrike()).isEqualTo(expected.getStrike());
     }
@@ -44,7 +44,7 @@ class ScoreTest {
         Score expected = new Score(0, 1);
 
         Balls balls = Balls.createBalls(input);
-        Score actual = Score.createScore(targetBalls, balls);
+        Score actual = Score.createScore(balls, targetBalls);
         System.out.println(actual.getBall() + " " + actual.getStrike());
 
         assertThat(actual.getBall()).isEqualTo(expected.getBall());
@@ -56,7 +56,7 @@ class ScoreTest {
         Score expected = new Score(1, 1);
 
         Balls balls = Balls.createBalls(input);
-        Score actual = Score.createScore(targetBalls, balls);
+        Score actual = Score.createScore(balls, targetBalls);
 
         assertThat(actual.getStrike()).isEqualTo(expected.getStrike());
         assertThat(actual.getBall()).isEqualTo(expected.getBall());

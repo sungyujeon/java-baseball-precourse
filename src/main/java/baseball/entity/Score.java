@@ -16,8 +16,8 @@ public final class Score {
         this.ball = ball;
     }
 
-    public static Score createScore(Balls answer, Balls candidates) {
-        return calculate(answer.getContainer(), candidates.getContainer());
+    public static Score createScore(Balls player, Balls computer) {
+        return calculate(player.getContainer(), computer.getContainer());
     }
 
     private static Score calculate(List<Integer> numbers, List<Integer> targetNumbers) {

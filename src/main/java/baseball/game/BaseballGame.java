@@ -49,6 +49,13 @@ public final class BaseballGame {
         }
     }
 
+    public boolean isAnswer(Score score) {
+        if (score.getStrike() == MAX_SIZE) {
+            return true;
+        }
+        return false;
+    }
+
     private GameStatus setGameStatusWithUserInput(String input) {
         if (!("1".equals(input) || "2".equals(input))){
             throw new IllegalArgumentException("user input to end game should be '1' or '2'.");
@@ -59,12 +66,5 @@ public final class BaseballGame {
         }
 
         return END;
-    }
-
-    public boolean isAnswer(Score score) {
-        if (score.getStrike() == MAX_SIZE) {
-            return true;
-        }
-        return false;
     }
 }
