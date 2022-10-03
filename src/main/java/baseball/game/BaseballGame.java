@@ -6,20 +6,20 @@ import baseball.entity.Score;
 import baseball.game.enums.GameStatus;
 
 import static baseball.constants.BaseballConstant.MAX_SIZE;
-import static baseball.game.BaseballComparator.*;
 import static baseball.game.enums.GameStatus.*;
 import static baseball.utils.InputUtils.*;
 import static baseball.utils.OutputUtils.*;
 
 public final class BaseballGame {
 
-    private GameStatus gameStatus = START;
+    private GameStatus gameStatus;
     private final Computer computer;
     private final Player player;
 
-    public BaseballGame(Computer computer, Player player) {
-        this.computer = computer;
-        this.player = player;
+    public BaseballGame() {
+        gameStatus = START;
+        this.computer = new Computer();
+        this.player = new Player();
     }
 
     public void start() {
@@ -33,10 +33,10 @@ public final class BaseballGame {
         String input = userInputWithMessage();
         player.changeBalls(input);
 
-        Score score = calculateScore(player.getBalls(), computer.getBalls());
+        Score score = Score.createScore(player.getBalls(), computer.getBalls());
         printResult(score);
 
-        if (score.getStrike() == MAX_SIZE) {
+        if (isAnswer(score)) {
             String endInput = userInputWithEndMessage();
             gameStatus = setGameStatusWithUserInput(endInput);
         }
@@ -47,6 +47,13 @@ public final class BaseballGame {
             computer.changeBalls();
             gameStatus = START;
         }
+    }
+
+    public boolean isAnswer(Score score) {
+        if (score.getStrike() == MAX_SIZE) {
+            return true;
+        }
+        return false;
     }
 
     private GameStatus setGameStatusWithUserInput(String input) {
